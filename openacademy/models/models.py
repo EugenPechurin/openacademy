@@ -45,7 +45,6 @@ class Session(models.Model):
 
     name = fields.Char(required=True)
     start_date = fields.Date(default=fields.Date.today)
-    start_date = fields.Date(default=fields.Date.today)
     duration = fields.Float(digits=(6, 2), help="Duration in days")
     seats = fields.Integer(string="Number of seats")
     active = fields.Boolean(default=True)
@@ -60,6 +59,7 @@ class Session(models.Model):
     taken_seats = fields.Float(string="Taken seats", compute='_taken_seats')
     end_date = fields.Date(string="End Date", store=True,
                            compute='_get_end_date', inverse='_set_end_date')
+
 
     @api.depends('seats', 'attendee_ids')
     def _taken_seats(self):
